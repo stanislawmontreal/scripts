@@ -122,8 +122,8 @@ function imgui.OnDrawFrame()
             --if imgui.Button(fa.ICON_USER..u8' Функции', imgui.ImVec2(110, 18)) then uu() menu[2] = true end
             --if imgui.Button(fa.ICON_STICKY_NOTE..u8' ID предметов', imgui.ImVec2(110, 18)) then uu() menu[3] = true end 
             --if imgui.Button(fa.ICON_MAP_MARKER_ALT..u8' Телепорты', imgui.ImVec2(110, 18)) then uu() menu[4] = true end --стандарт размер был 135, 20
-            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Меню").x) / 2)
-            imgui.Text(u8'Меню')
+            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Менюшка").x) / 2)
+            imgui.Text(u8'Менюшка')
             imgui.Separator()
             if imgui.Selectable(fa.ICON_BARS..u8 ' Главная') then uu() menu [1] = true end --5
             if imgui.Selectable(fa.ICON_COG..u8' Настройка МП') then uu() menu[2] = true end --1
