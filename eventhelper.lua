@@ -12,8 +12,8 @@ u8 = encoding.UTF8
 local dlstatus = require('moonloader').download_status
 update_state = false
 
-local script_vers = 3
-local script_vers_text = "1.10"
+local script_vers = 4
+local script_vers_text = "1.15"
 
 local update_url = "https://raw.githubusercontent.com/makvinov/scripts/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
@@ -122,14 +122,14 @@ function imgui.OnDrawFrame()
             --if imgui.Button(fa.ICON_USER..u8' Функции', imgui.ImVec2(110, 18)) then uu() menu[2] = true end
             --if imgui.Button(fa.ICON_STICKY_NOTE..u8' ID предметов', imgui.ImVec2(110, 18)) then uu() menu[3] = true end 
             --if imgui.Button(fa.ICON_MAP_MARKER_ALT..u8' Телепорты', imgui.ImVec2(110, 18)) then uu() menu[4] = true end --стандарт размер был 135, 20
-            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Менюшка").x) / 2)
-            imgui.Text(u8'Менюшка')
+            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Меню").x) / 2)
+            imgui.Text(u8'Меню')
             imgui.Separator()
             if imgui.Selectable(fa.ICON_BARS..u8 ' Главная') then uu() menu [1] = true end --5
             if imgui.Selectable(fa.ICON_COG..u8' Настройка МП') then uu() menu[2] = true end --1
             if imgui.Selectable(fa.ICON_USER..u8' Функции') then uu() menu[3] = true end --2 
             if imgui.Selectable(fa.ICON_STICKY_NOTE..u8' ID предметов') then uu() menu[4] = true end --3
-            if imgui.Selectable(fa.ICON_MAP_MARKER_ALT..u8' Телепортыt') then uu() menu[5] = true end --4
+            if imgui.Selectable(fa.ICON_MAP_MARKER_ALT..u8' Телепорты') then uu() menu[5] = true end --4
         imgui.EndChild()
         imgui.SameLine()
         if menu[1] then --5
