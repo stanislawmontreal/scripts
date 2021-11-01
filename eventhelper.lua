@@ -12,8 +12,8 @@ u8 = encoding.UTF8
 local dlstatus = require('moonloader').download_status
 update_state = false
 
-local script_vers = 4
-local script_vers_text = "1.15"
+local script_vers = 5
+local script_vers_text = "1.20"
 
 local update_url = "https://raw.githubusercontent.com/makvinov/scripts/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
@@ -135,7 +135,7 @@ function imgui.OnDrawFrame()
         if menu[1] then --5
             imgui.BeginChild('child5', imgui.ImVec2(557, 335), true)
             imgui.PushFont(fontsize)
-            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"ya daun").x) / 2)
+            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"привет,").x) / 2)
             result, id = sampGetPlayerIdByCharHandle(PLAYER_PED)
                 imgui.Text(u8'привет,')
                 imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(sampGetPlayerNickname(id)).x) / 2)
@@ -159,7 +159,7 @@ function imgui.OnDrawFrame()
             end
 
             imgui.PushItemWidth(200.00)
-            if imgui.InputText(u8'Победитель МП. Пример: Vasya Pupkin', mpwinner) then
+            if imgui.InputText(u8'Победитель МП. Пример: Vasya Pupkin(234id)', mpwinner) then
                 mainini.config.mpwinner = u8:decode(mpwinner.v)
                 inicfg.save(mainini, 'eventhelper.ini')
             end
