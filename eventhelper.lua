@@ -12,8 +12,8 @@ u8 = encoding.UTF8
 local dlstatus = require('moonloader').download_status
 update_state = false
 
-local script_vers = 1
-local script_vers_text = "1.00"
+local script_vers = 2
+local script_vers_text = "1.05"
 
 local update_url = "https://raw.githubusercontent.com/makvinov/scripts/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
@@ -50,11 +50,11 @@ local mainini = inicfg.load({
     }
 }, "eventhelper")
 
---настройка мп
+--Г­Г Г±ГІГ°Г®Г©ГЄГ  Г¬ГЇ
 local mpname = imgui.ImBuffer(256)
 local mpreward = imgui.ImBuffer(256)
 local mpwinner = imgui.ImBuffer(256)
---выдача чего-либо
+--ГўГ»Г¤Г Г·Г  Г·ГҐГЈГ®-Г«ГЁГЎГ®
 local mpallgun = imgui.ImBuffer(256)
 local mpkolvohp = imgui.ImBuffer(256)
 local rvidachihp = imgui.ImBuffer(256)
@@ -74,7 +74,7 @@ function main()
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.info.vers) > script_vers then
-                sampAddChatMessage("Есть обновление. Версия: " .. updateIni.info.vers_text, -1)
+                sampAddChatMessage("Г…Г±ГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. Г‚ГҐГ°Г±ГЁГї: " .. updateIni.info.vers_text, -1)
                 update_state = true
             end
             os.remove(update_path)
@@ -86,7 +86,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    sampAddChatMessage("Скрипт успешно обновлён!", -1)
+                    sampAddChatMessage("Г‘ГЄГ°ГЁГЇГІ ГіГ±ГЇГҐГёГ­Г® Г®ГЎГ­Г®ГўГ«ВёГ­!", -1)
                     thisScript():reload()
                 end
             end)
@@ -103,7 +103,7 @@ function main()
         if myNick ~= 123 then
             sampAddChatMessage('')
             sampAddChatMessage('')
-            sampAddChatMessage('твой ник не ZXCмарвел поэтому пошол нахуи и eventHELPr не работаэ', -1)
+            sampAddChatMessage('ГІГўГ®Г© Г­ГЁГЄ Г­ГҐ ZXCГ¬Г Г°ГўГҐГ« ГЇГ®ГЅГІГ®Г¬Гі ГЇГ®ГёГ®Г« Г­Г ГµГіГЁ ГЁ eventHELPr Г­ГҐ Г°Г ГЎГ®ГІГ ГЅ', -1)
             sampAddChatMessage('')
             sampAddChatMessage('')
             thisScript():unload()
@@ -118,18 +118,18 @@ function imgui.OnDrawFrame()
         imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
         imgui.Begin(fa.ICON_USERS..u8' Event Helper', main_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
         imgui.BeginChild("child", imgui.ImVec2(123, 335), true)
-            --if imgui.Button(fa.ICON_COG..u8' Настройка МП', imgui.ImVec2(110, 18)) then uu() menu[1] = true end
-            --if imgui.Button(fa.ICON_USER..u8' Функции', imgui.ImVec2(110, 18)) then uu() menu[2] = true end
-            --if imgui.Button(fa.ICON_STICKY_NOTE..u8' ID предметов', imgui.ImVec2(110, 18)) then uu() menu[3] = true end 
-            --if imgui.Button(fa.ICON_MAP_MARKER_ALT..u8' Телепорты', imgui.ImVec2(110, 18)) then uu() menu[4] = true end --стандарт размер был 135, 20
-            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Менюшка").x) / 2)
-            imgui.Text(u8'Менюшка')
+            --if imgui.Button(fa.ICON_COG..u8' ГЌГ Г±ГІГ°Г®Г©ГЄГ  ГЊГЏ', imgui.ImVec2(110, 18)) then uu() menu[1] = true end
+            --if imgui.Button(fa.ICON_USER..u8' Г”ГіГ­ГЄГ¶ГЁГЁ', imgui.ImVec2(110, 18)) then uu() menu[2] = true end
+            --if imgui.Button(fa.ICON_STICKY_NOTE..u8' ID ГЇГ°ГҐГ¤Г¬ГҐГІГ®Гў', imgui.ImVec2(110, 18)) then uu() menu[3] = true end 
+            --if imgui.Button(fa.ICON_MAP_MARKER_ALT..u8' Г’ГҐГ«ГҐГЇГ®Г°ГІГ»', imgui.ImVec2(110, 18)) then uu() menu[4] = true end --Г±ГІГ Г­Г¤Г Г°ГІ Г°Г Г§Г¬ГҐГ° ГЎГ»Г« 135, 20
+            imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"ГЊГҐГ­ГѕГёГЄГ ").x) / 2)
+            imgui.Text(u8'ГЊГҐГ­ГѕГёГЄГ ')
             imgui.Separator()
-            if imgui.Selectable(fa.ICON_BARS..u8 ' Главная') then uu() menu [1] = true end --5
-            if imgui.Selectable(fa.ICON_COG..u8' Настройка МП') then uu() menu[2] = true end --1
-            if imgui.Selectable(fa.ICON_USER..u8' Функции') then uu() menu[3] = true end --2 
-            if imgui.Selectable(fa.ICON_STICKY_NOTE..u8' ID предметов') then uu() menu[4] = true end --3
-            if imgui.Selectable(fa.ICON_MAP_MARKER_ALT..u8' Телепорты') then uu() menu[5] = true end --4
+            if imgui.Selectable(fa.ICON_BARS..u8 ' ГѓГ«Г ГўГ­Г Гї') then uu() menu [1] = true end --5
+            if imgui.Selectable(fa.ICON_COG..u8' ГЌГ Г±ГІГ°Г®Г©ГЄГ  ГЊГЏ') then uu() menu[2] = true end --1
+            if imgui.Selectable(fa.ICON_USER..u8' Г”ГіГ­ГЄГ¶ГЁГЁ') then uu() menu[3] = true end --2 
+            if imgui.Selectable(fa.ICON_STICKY_NOTE..u8' ID ГЇГ°ГҐГ¤Г¬ГҐГІГ®Гў') then uu() menu[4] = true end --3
+            if imgui.Selectable(fa.ICON_MAP_MARKER_ALT..u8' Г’ГҐГ«ГҐГЇГ®Г°ГІГ»') then uu() menu[5] = true end --4
         imgui.EndChild()
         imgui.SameLine()
         if menu[1] then --5
@@ -137,7 +137,7 @@ function imgui.OnDrawFrame()
             imgui.PushFont(fontsize)
             imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8"ya daun").x) / 2)
             result, id = sampGetPlayerIdByCharHandle(PLAYER_PED)
-                imgui.Text(u8'привет,')
+                imgui.Text(u8'ГЇГ°ГЁГўГҐГІ,')
                 imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(sampGetPlayerNickname(id)).x) / 2)
                 imgui.Text(sampGetPlayerNickname(id))
             imgui.PopFont()
@@ -147,36 +147,36 @@ function imgui.OnDrawFrame()
         if menu[2] then --1
             imgui.BeginChild('child1', imgui.ImVec2(557, 335), true)
             imgui.PushItemWidth(200.00)
-            if imgui.InputText(u8'Название МП. Пример: Прятки', mpname) then
+            if imgui.InputText(u8'ГЌГ Г§ГўГ Г­ГЁГҐ ГЊГЏ. ГЏГ°ГЁГ¬ГҐГ°: ГЏГ°ГїГІГЄГЁ', mpname) then
                 mainini.config.mpname = u8:decode(mpname.v)
                 inicfg.save(mainini, 'eventhelper.ini')
             end
             
             imgui.PushItemWidth(200.00)
-            if imgui.InputText(u8'Приз МП. Пример: 10000$', mpreward) then
+            if imgui.InputText(u8'ГЏГ°ГЁГ§ ГЊГЏ. ГЏГ°ГЁГ¬ГҐГ°: 10000$', mpreward) then
                 mainini.config.mpreward = u8:decode(mpreward.v)
                 inicfg.save(mainini, 'eventhelper.ini')
             end
 
             imgui.PushItemWidth(200.00)
-            if imgui.InputText(u8'Победитель МП. Пример: Vasya Pupkin', mpwinner) then
+            if imgui.InputText(u8'ГЏГ®ГЎГҐГ¤ГЁГІГҐГ«Гј ГЊГЏ. ГЏГ°ГЁГ¬ГҐГ°: Vasya Pupkin', mpwinner) then
                 mainini.config.mpwinner = u8:decode(mpwinner.v)
                 inicfg.save(mainini, 'eventhelper.ini')
             end
             
             imgui.Separator()
-            imgui.Text(u8'Открытие МП')
-            imgui.Text(u8'Чтобы открыть МП - нажмите на две кнопки с задержкой 1-3 секунды.')
-            imgui.Text(u8'Строки открытия МП отправляемые в /esay:')
-            imgui.Text(u8('1 строка: Уважаемые игроки, сейчас будет проводиться мероприятие "'..mainini.config.mpname..'".'))
-            imgui.Text(u8('2 строка: Для телепортации на мероприятие используйте — /tp & /warp. Приз: '..mainini.config.mpreward..'.'))
+            imgui.Text(u8'ГЋГІГЄГ°Г»ГІГЁГҐ ГЊГЏ')
+            imgui.Text(u8'Г—ГІГ®ГЎГ» Г®ГІГЄГ°Г»ГІГј ГЊГЏ - Г­Г Г¦Г¬ГЁГІГҐ Г­Г  Г¤ГўГҐ ГЄГ­Г®ГЇГЄГЁ Г± Г§Г Г¤ГҐГ°Г¦ГЄГ®Г© 1-3 Г±ГҐГЄГіГ­Г¤Г».')
+            imgui.Text(u8'Г‘ГІГ°Г®ГЄГЁ Г®ГІГЄГ°Г»ГІГЁГї ГЊГЏ Г®ГІГЇГ°Г ГўГ«ГїГҐГ¬Г»ГҐ Гў /esay:')
+            imgui.Text(u8('1 Г±ГІГ°Г®ГЄГ : Г“ГўГ Г¦Г ГҐГ¬Г»ГҐ ГЁГЈГ°Г®ГЄГЁ, Г±ГҐГ©Г·Г Г± ГЎГіГ¤ГҐГІ ГЇГ°Г®ГўГ®Г¤ГЁГІГјГ±Гї Г¬ГҐГ°Г®ГЇГ°ГЁГїГІГЁГҐ "'..mainini.config.mpname..'".'))
+            imgui.Text(u8('2 Г±ГІГ°Г®ГЄГ : Г„Г«Гї ГІГҐГ«ГҐГЇГ®Г°ГІГ Г¶ГЁГЁ Г­Г  Г¬ГҐГ°Г®ГЇГ°ГЁГїГІГЁГҐ ГЁГ±ГЇГ®Г«ГјГ§ГіГ©ГІГҐ вЂ” /tp & /warp. ГЏГ°ГЁГ§: '..mainini.config.mpreward..'.'))
             imgui.Separator()
-            imgui.Text(u8'Закрытие МП')
-            imgui.Text(u8'Строка закрытия МП отправляемая в /esay:')
-            imgui.Text(u8('Победителем мероприятия "'..mainini.config.mpname..'" стал - '..mainini.config.mpwinner.. ', поздравляем!'))
+            imgui.Text(u8'Г‡Г ГЄГ°Г»ГІГЁГҐ ГЊГЏ')
+            imgui.Text(u8'Г‘ГІГ°Г®ГЄГ  Г§Г ГЄГ°Г»ГІГЁГї ГЊГЏ Г®ГІГЇГ°Г ГўГ«ГїГҐГ¬Г Гї Гў /esay:')
+            imgui.Text(u8('ГЏГ®ГЎГҐГ¤ГЁГІГҐГ«ГҐГ¬ Г¬ГҐГ°Г®ГЇГ°ГЁГїГІГЁГї "'..mainini.config.mpname..'" Г±ГІГ Г« - '..mainini.config.mpwinner.. ', ГЇГ®Г§Г¤Г°Г ГўГ«ГїГҐГ¬!'))
             imgui.Separator()
 
-            --if imgui.Button(u8'Сохранить настройки', imgui.ImVec2(-0.1, 20)) then
+            --if imgui.Button(u8'Г‘Г®ГµГ°Г Г­ГЁГІГј Г­Г Г±ГІГ°Г®Г©ГЄГЁ', imgui.ImVec2(-0.1, 20)) then
                 --mainini.config.mpname = u8:decode(mpname.v)
                 --mainini.config.mpreward = u8:decode(mpreward.v)
                 --mainini.config.mpwinner = u8:decode(mpwinner.v) 
@@ -184,17 +184,17 @@ function imgui.OnDrawFrame()
                 --printStringNow('save!', 1500)
             --end
 
-            if imgui.Button(u8'Настроить ВАРП', imgui.ImVec2(-0.1, 20)) then
+            if imgui.Button(u8'ГЌГ Г±ГІГ°Г®ГЁГІГј Г‚ГЂГђГЏ', imgui.ImVec2(-0.1, 20)) then
                 sampSendChat('/warpcp')
             end
-            if imgui.Button(u8'Отправить первую строку открытия МП в /esay', imgui.ImVec2(-0.1, 20)) then
-                sampSendChat('Уважаемые игроки, сейчас будет проводиться мероприятие "'..mainini.config.mpname..'".')
+            if imgui.Button(u8'ГЋГІГЇГ°Г ГўГЁГІГј ГЇГҐГ°ГўГіГѕ Г±ГІГ°Г®ГЄГі Г®ГІГЄГ°Г»ГІГЁГї ГЊГЏ Гў /esay', imgui.ImVec2(-0.1, 20)) then
+                sampSendChat('Г“ГўГ Г¦Г ГҐГ¬Г»ГҐ ГЁГЈГ°Г®ГЄГЁ, Г±ГҐГ©Г·Г Г± ГЎГіГ¤ГҐГІ ГЇГ°Г®ГўГ®Г¤ГЁГІГјГ±Гї Г¬ГҐГ°Г®ГЇГ°ГЁГїГІГЁГҐ "'..mainini.config.mpname..'".')
             end
-            if imgui.Button(u8'Отправить вторую строку открытия МП в /esay', imgui.ImVec2(-0.1, 20)) then 
-                sampSendChat('Для телепортации на мероприятие используйте — /tp & /warp. Приз: '..mainini.config.mpreward..'.')
+            if imgui.Button(u8'ГЋГІГЇГ°Г ГўГЁГІГј ГўГІГ®Г°ГіГѕ Г±ГІГ°Г®ГЄГі Г®ГІГЄГ°Г»ГІГЁГї ГЊГЏ Гў /esay', imgui.ImVec2(-0.1, 20)) then 
+                sampSendChat('Г„Г«Гї ГІГҐГ«ГҐГЇГ®Г°ГІГ Г¶ГЁГЁ Г­Г  Г¬ГҐГ°Г®ГЇГ°ГЁГїГІГЁГҐ ГЁГ±ГЇГ®Г«ГјГ§ГіГ©ГІГҐ вЂ” /tp & /warp. ГЏГ°ГЁГ§: '..mainini.config.mpreward..'.')
             end
-            if imgui.Button(u8'Отправить строку закрытия МП в /esay', imgui.ImVec2(-0.1, 20)) then
-                sampSendChat('Победителем мероприятия "'..mainini.config.mpname..'" стал - '..mainini.config.mpwinner.. ', поздравляем!')
+            if imgui.Button(u8'ГЋГІГЇГ°Г ГўГЁГІГј Г±ГІГ°Г®ГЄГі Г§Г ГЄГ°Г»ГІГЁГї ГЊГЏ Гў /esay', imgui.ImVec2(-0.1, 20)) then
+                sampSendChat('ГЏГ®ГЎГҐГ¤ГЁГІГҐГ«ГҐГ¬ Г¬ГҐГ°Г®ГЇГ°ГЁГїГІГЁГї "'..mainini.config.mpname..'" Г±ГІГ Г« - '..mainini.config.mpwinner.. ', ГЇГ®Г§Г¤Г°Г ГўГ«ГїГҐГ¬!')
             end
 
             imgui.EndChild()
@@ -203,63 +203,63 @@ function imgui.OnDrawFrame()
         if menu[3] then --2
             imgui.BeginChild('child2', imgui.ImVec2(557, 335), true)
 
-                if imgui.Button(u8'Выдать ХП', imgui.ImVec2(120, 20)) then
+                if imgui.Button(u8'Г‚Г»Г¤Г ГІГј Г•ГЏ', imgui.ImVec2(120, 20)) then
                     sampSendChat('/hpall '..mainini.config.rvidachihp.. ' ' ..mainini.config.mpkolvohp) 
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'в радиусе')
+                imgui.Text(u8'Гў Г°Г Г¤ГЁГіГ±ГҐ')
                 imgui.SameLine()
 
                 imgui.PushItemWidth(25.00)
-                if imgui.InputText(u8'р', rvidachihp) then
+                if imgui.InputText(u8'Г°', rvidachihp) then
                     mainini.config.rvidachihp = u8:decode(rvidachihp.v)
                     inicfg.save(mainini, 'eventhelper.ini')
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'по')
+                imgui.Text(u8'ГЇГ®')
                 imgui.SameLine()
                 imgui.PushItemWidth(25.00)
-                if imgui.InputText(u8'х', mpkolvohp) then
+                if imgui.InputText(u8'Гµ', mpkolvohp) then
                     mainini.config.mpkolvohp = u8:decode(mpkolvohp.v)
                     inicfg.save(mainini, 'eventhelper.ini')
                 end
 
-                if imgui.Button(u8'Выдать ХПкар', imgui.ImVec2(120, 20)) then
+                if imgui.Button(u8'Г‚Г»Г¤Г ГІГј Г•ГЏГЄГ Г°', imgui.ImVec2(120, 20)) then
                     sampSendChat('/fixr '..mainini.config.mprfix)
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'в радиусе')
+                imgui.Text(u8'Гў Г°Г Г¤ГЁГіГ±ГҐ')
                 imgui.SameLine()
 
                 imgui.PushItemWidth(25.00)
-                if imgui.InputText(u8'рх', mprfix) then
+                if imgui.InputText(u8'Г°Гµ', mprfix) then
                     mainini.config.mprfix = u8:decode(mprfix.v)
                     inicfg.save(mainini, 'eventhelper.ini')
                 end
             
-                if imgui.Button(u8'Выдать ГАН', imgui.ImVec2(120, 20)) then
+                if imgui.Button(u8'Г‚Г»Г¤Г ГІГј ГѓГЂГЌ', imgui.ImVec2(120, 20)) then
                     sampSendChat('/allgun '..mainini.config.mpallgun) 
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'всем в ивент-мире с ID')
+                imgui.Text(u8'ГўГ±ГҐГ¬ Гў ГЁГўГҐГ­ГІ-Г¬ГЁГ°ГҐ Г± ID')
                 imgui.SameLine()
 
                 imgui.PushItemWidth(25.00)
-                if imgui.InputText(u8'г', mpallgun) then
+                if imgui.InputText(u8'ГЈ', mpallgun) then
                     mainini.config.mpallgun = u8:decode(mpallgun.v)
                     inicfg.save(mainini, 'eventhelper.ini')
                 end
 
-                if imgui.Button(u8'Выдать ГАНчел', imgui.ImVec2(120, 20)) then
+                if imgui.Button(u8'Г‚Г»Г¤Г ГІГј ГѓГЂГЌГ·ГҐГ«', imgui.ImVec2(120, 20)) then
                     sampSendChat('/ggun '..mainini.config.mpchelid..' '..mainini.config.mpgunchel)
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'игроку с')
+                imgui.Text(u8'ГЁГЈГ°Г®ГЄГі Г±')
                 imgui.SameLine()
 
                 imgui.PushItemWidth(25.00)
@@ -269,44 +269,44 @@ function imgui.OnDrawFrame()
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'оружие с ID')
+                imgui.Text(u8'Г®Г°ГіГ¦ГЁГҐ Г± ID')
                 imgui.SameLine()
 
                 imgui.PushItemWidth(25.00)
-                if imgui.InputText(u8'гИД', mpgunchel) then
+                if imgui.InputText(u8'ГЈГ€Г„', mpgunchel) then
                     mainini.config.mpgunchel = u8:decode(mpgunchel.v)
                     inicfg.save(mainini, 'eventhelper.ini')
                 end
 
-                if imgui.Button(u8'Выдать БРОНЮ', imgui.ImVec2(120, 20)) then
+                if imgui.Button(u8'Г‚Г»Г¤Г ГІГј ГЃГђГЋГЌГћ', imgui.ImVec2(120, 20)) then
                     sampSendChat('/armall')
                 end
                 imgui.SameLine()
-                imgui.Text(u8'всем в ивент-мире')
+                imgui.Text(u8'ГўГ±ГҐГ¬ Гў ГЁГўГҐГ­ГІ-Г¬ГЁГ°ГҐ')
 
-                if imgui.Button(u8'Выдать БРОНЮчел', imgui.ImVec2(120, 20)) then
+                if imgui.Button(u8'Г‚Г»Г¤Г ГІГј ГЃГђГЋГЌГћГ·ГҐГ«', imgui.ImVec2(120, 20)) then
                     sampSendChat('/garm '..mainini.config.mparmchel)
                 end
 
                 imgui.SameLine()
-                imgui.Text(u8'игроку с')
+                imgui.Text(u8'ГЁГЈГ°Г®ГЄГі Г±')
                 imgui.SameLine()
 
                 imgui.PushItemWidth(25.00)
-                if imgui.InputText(u8'аИД', mparmchel) then
+                if imgui.InputText(u8'Г Г€Г„', mparmchel) then
                     mainini.config.mparmchel = u8:decode(mparmchel.v)
                     inicfg.save(mainini, 'eventhelper.ini')
                 end
 
-                if imgui.Button(u8'Зафризить всех в радиусе 100', imgui.ImVec2(-0.1, 20)) then
+                if imgui.Button(u8'Г‡Г ГґГ°ГЁГ§ГЁГІГј ГўГ±ГҐГµ Гў Г°Г Г¤ГЁГіГ±ГҐ 100', imgui.ImVec2(-0.1, 20)) then
                     sampSendChat('/frall 100')
                 end
 
-                if imgui.Button(u8'Расфризить всех в радиусе 100', imgui.ImVec2(-0.1, 20)) then
+                if imgui.Button(u8'ГђГ Г±ГґГ°ГЁГ§ГЁГІГј ГўГ±ГҐГµ Гў Г°Г Г¤ГЁГіГ±ГҐ 100', imgui.ImVec2(-0.1, 20)) then
                     sampSendChat('/unfrall 100')
                 end
 
-                if imgui.Button(u8'Выгнать всех из ивент-мира(/aworld)', imgui.ImVec2(-0.1, 20)) then
+                if imgui.Button(u8'Г‚Г»ГЈГ­Г ГІГј ГўГ±ГҐГµ ГЁГ§ ГЁГўГҐГ­ГІ-Г¬ГЁГ°Г (/aworld)', imgui.ImVec2(-0.1, 20)) then
                     sampSendChat('/clearworld')
                 end
 
@@ -314,146 +314,146 @@ function imgui.OnDrawFrame()
         end
         if menu[4] then --3
             imgui.BeginChild('child3', imgui.ImVec2(557, 335), true)
-                imgui.Text(u8'Кастет - 1')
+                imgui.Text(u8'ГЉГ Г±ГІГҐГІ - 1')
                 imgui.SameLine()
-                imgui.Text(u8'Клюшка - 2')
-                imgui.Text(u8'Дубинка - 3')
+                imgui.Text(u8'ГЉГ«ГѕГёГЄГ  - 2')
+                imgui.Text(u8'Г„ГіГЎГЁГ­ГЄГ  - 3')
                 imgui.SameLine()
-                imgui.Text(u8'Нож - 4')
-                imgui.Text(u8'Бита - 5')
+                imgui.Text(u8'ГЌГ®Г¦ - 4')
+                imgui.Text(u8'ГЃГЁГІГ  - 5')
                 imgui.SameLine()
-                imgui.Text(u8'Лопата - 6')
-                imgui.Text(u8'Кий - 7')
+                imgui.Text(u8'Г‹Г®ГЇГ ГІГ  - 6')
+                imgui.Text(u8'ГЉГЁГ© - 7')
                 imgui.SameLine()
-                imgui.Text(u8'Катана - 8')
-                imgui.Text(u8'Бензопила - 9')
+                imgui.Text(u8'ГЉГ ГІГ Г­Г  - 8')
+                imgui.Text(u8'ГЃГҐГ­Г§Г®ГЇГЁГ«Г  - 9')
                 imgui.SameLine()
-                imgui.Text(u8'Дилдо - 10-13')
-                imgui.Text(u8'Букет цветов - 14')
+                imgui.Text(u8'Г„ГЁГ«Г¤Г® - 10-13')
+                imgui.Text(u8'ГЃГіГЄГҐГІ Г¶ГўГҐГІГ®Гў - 14')
                 imgui.SameLine()
-                imgui.Text(u8'Трость - 15')
-                imgui.Text(u8'Граната - 16')
+                imgui.Text(u8'Г’Г°Г®Г±ГІГј - 15')
+                imgui.Text(u8'ГѓГ°Г Г­Г ГІГ  - 16')
                 imgui.SameLine()
-                imgui.Text(u8'Дымовая граната - 17')
-                imgui.Text(u8'Коктейль молотова - 18')
+                imgui.Text(u8'Г„Г»Г¬Г®ГўГ Гї ГЈГ°Г Г­Г ГІГ  - 17')
+                imgui.Text(u8'ГЉГ®ГЄГІГҐГ©Г«Гј Г¬Г®Г«Г®ГІГ®ГўГ  - 18')
                 imgui.SameLine()
-                imgui.Text(u8'Кольт - 22')
-                imgui.Text(u8'Кольт с глушителем - 23')
+                imgui.Text(u8'ГЉГ®Г«ГјГІ - 22')
+                imgui.Text(u8'ГЉГ®Г«ГјГІ Г± ГЈГ«ГіГёГЁГІГҐГ«ГҐГ¬ - 23')
                 imgui.SameLine()
-                imgui.Text(u8'Дигл - 24')
-                imgui.Text(u8'Шотган - 25')
+                imgui.Text(u8'Г„ГЁГЈГ« - 24')
+                imgui.Text(u8'ГГ®ГІГЈГ Г­ - 25')
                 imgui.SameLine()
-                imgui.Text(u8'Обрез - 26')
-                imgui.Text(u8'Комбат шотган - 27')
+                imgui.Text(u8'ГЋГЎГ°ГҐГ§ - 26')
+                imgui.Text(u8'ГЉГ®Г¬ГЎГ ГІ ГёГ®ГІГЈГ Г­ - 27')
                 imgui.SameLine()
-                imgui.Text(u8'Узи - 28')
-                imgui.Text(u8'МП5 - 29')
+                imgui.Text(u8'Г“Г§ГЁ - 28')
+                imgui.Text(u8'ГЊГЏ5 - 29')
                 imgui.SameLine()
-                imgui.Text(u8'Калаш - 30')
-                imgui.Text(u8'М4 - 31')
+                imgui.Text(u8'ГЉГ Г«Г Гё - 30')
+                imgui.Text(u8'ГЊ4 - 31')
                 imgui.SameLine()
-                imgui.Text(u8'Тек9 - 32')
-                imgui.Text(u8'Рифла - 33')
+                imgui.Text(u8'Г’ГҐГЄ9 - 32')
+                imgui.Text(u8'ГђГЁГґГ«Г  - 33')
                 imgui.SameLine()
-                imgui.Text(u8'Снайпер рифла - 34')
-                imgui.Text(u8'РПГ - 35')
+                imgui.Text(u8'Г‘Г­Г Г©ГЇГҐГ° Г°ГЁГґГ«Г  - 34')
+                imgui.Text(u8'ГђГЏГѓ - 35')
                 imgui.SameLine()
-                imgui.Text(u8'Самонаводящийся РПГ - 36')
-                imgui.Text(u8'Огнемёт - 37')
+                imgui.Text(u8'Г‘Г Г¬Г®Г­Г ГўГ®Г¤ГїГ№ГЁГ©Г±Гї ГђГЏГѓ - 36')
+                imgui.Text(u8'ГЋГЈГ­ГҐГ¬ВёГІ - 37')
                 imgui.SameLine()
-                imgui.Text(u8'Миниган - 38')
-                imgui.Text(u8'Сумка с бомбой - 39')
+                imgui.Text(u8'ГЊГЁГ­ГЁГЈГ Г­ - 38')
+                imgui.Text(u8'Г‘ГіГ¬ГЄГ  Г± ГЎГ®Г¬ГЎГ®Г© - 39')
                 imgui.SameLine()
-                imgui.Text(u8'Детонатор для сумки - 40')
-                imgui.Text(u8'Балончик - 41')
+                imgui.Text(u8'Г„ГҐГІГ®Г­Г ГІГ®Г° Г¤Г«Гї Г±ГіГ¬ГЄГЁ - 40')
+                imgui.Text(u8'ГЃГ Г«Г®Г­Г·ГЁГЄ - 41')
                 imgui.SameLine()
-                imgui.Text(u8'Огнетушитель - 42')
-                imgui.Text(u8'Фотоаппарат - 43')
+                imgui.Text(u8'ГЋГЈГ­ГҐГІГіГёГЁГІГҐГ«Гј - 42')
+                imgui.Text(u8'Г”Г®ГІГ®Г ГЇГЇГ Г°Г ГІ - 43')
                 imgui.SameLine()
-                imgui.Text(u8'ПНВ - 44')
-                imgui.Text(u8'Тепловизор - 45')
+                imgui.Text(u8'ГЏГЌГ‚ - 44')
+                imgui.Text(u8'Г’ГҐГЇГ«Г®ГўГЁГ§Г®Г° - 45')
                 imgui.SameLine()
-                imgui.Text(u8'Парашют - 46')
+                imgui.Text(u8'ГЏГ Г°Г ГёГѕГІ - 46')
             imgui.EndChild()
         end
 
         if menu[5] then --4
             imgui.BeginChild('child4', imgui.ImVec2(557, 335), true)
 
-                if imgui.Button(u8'Прятки', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГЏГ°ГїГІГЄГЁ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 16')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Кулачные бои', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГЉГіГ«Г Г·Г­Г»ГҐ ГЎГ®ГЁ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 42')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Лабиринт', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г‹Г ГЎГЁГ°ГЁГ­ГІ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 36')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Царь горы', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г–Г Г°Гј ГЈГ®Г°Г»', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 17')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Сплифф', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г‘ГЇГ«ГЁГґГґ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/spliff')
                 end
-                if imgui.Button(u8'Король дигла', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГЉГ®Г°Г®Г«Гј Г¤ГЁГЈГ«Г ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 42')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Бег с припят.', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГЃГҐГЈ Г± ГЇГ°ГЁГЇГїГІ.', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 22')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Шахтёр', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГГ ГµГІВёГ°', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 41')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Спирали', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г‘ГЇГЁГ°Г Г«ГЁ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 5')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Гонки на выжив.', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГѓГ®Г­ГЄГЁ Г­Г  ГўГ»Г¦ГЁГў.', imgui.ImVec2(105, 20)) then
                     sampSendChat('/iwarp 99')
                 end
-                if imgui.Button(u8'Дерби', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г„ГҐГ°ГЎГЁ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/iwarp 108')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Морской бой', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'ГЊГ®Г°Г±ГЄГ®Г© ГЎГ®Г©', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 19')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Забег', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г‡Г ГЎГҐГЈ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 14')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Черви', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г—ГҐГ°ГўГЁ', imgui.ImVec2(105, 20)) then
                     sampSendChat('/awarp 18')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Сутенёр', imgui.ImVec2(105, 20)) then
+                if imgui.Button(u8'Г‘ГіГІГҐГ­ВёГ°', imgui.ImVec2(105, 20)) then
                     sampSendChat('/iwarp 3')
                 end
-                if imgui.Button(u8'На абордаж', imgui.ImVec2(105,20)) then
+                if imgui.Button(u8'ГЌГ  Г ГЎГ®Г°Г¤Г Г¦', imgui.ImVec2(105,20)) then
                     sampSendChat('/iwarp 2')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Смерт. вирус.', imgui.ImVec2(105,20)) then
+                if imgui.Button(u8'Г‘Г¬ГҐГ°ГІ. ГўГЁГ°ГіГ±.', imgui.ImVec2(105,20)) then
                     sampSendChat('/iwarp 2')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Взрыв. рулетка.', imgui.ImVec2(105,20)) then
+                if imgui.Button(u8'Г‚Г§Г°Г»Гў. Г°ГіГ«ГҐГІГЄГ .', imgui.ImVec2(105,20)) then
                     sampSendChat('/iwarp 108')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Воздушные бои', imgui.ImVec2(105,20)) then
+                if imgui.Button(u8'Г‚Г®Г§Г¤ГіГёГ­Г»ГҐ ГЎГ®ГЁ', imgui.ImVec2(105,20)) then
                     sampSendChat('ne rabotaet poka 4to')
                 end
                 imgui.SameLine()
-                if imgui.Button(u8'Побег', imgui.ImVec2(105,20)) then
+                if imgui.Button(u8'ГЏГ®ГЎГҐГЈ', imgui.ImVec2(105,20)) then
                     sampSendChat('/island')
                 end
             
@@ -478,7 +478,7 @@ function imgui.BeforeDrawFrame()
     end
 
     if fontsize == nil then
-        fontsize = imgui.GetIO().Fonts:AddFontFromFileTTF(getFolderPath(0x14) .. '\\trebucbd.ttf', 30.0, nil, imgui.GetIO().Fonts:GetGlyphRangesCyrillic()) -- вместо 30 любой нужный размер
+        fontsize = imgui.GetIO().Fonts:AddFontFromFileTTF(getFolderPath(0x14) .. '\\trebucbd.ttf', 30.0, nil, imgui.GetIO().Fonts:GetGlyphRangesCyrillic()) -- ГўГ¬ГҐГ±ГІГ® 30 Г«ГѕГЎГ®Г© Г­ГіГ¦Г­Г»Г© Г°Г Г§Г¬ГҐГ°
     end
 end
 
