@@ -12,8 +12,8 @@ u8 = encoding.UTF8
 local dlstatus = require('moonloader').download_status
 update_state = false
 
-local script_vers = 4
-local script_vers_text = "1.15"
+local script_vers = 5
+local script_vers_text = "1.20"
 
 local update_url = "https://raw.githubusercontent.com/makvinov/scripts/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
@@ -463,7 +463,7 @@ function imgui.OnDrawFrame()
             imgui.EndChild()
         end
 
-        if menu[5] then
+        if menu[6] then
             imgui.BeginChild('child6', imgui.ImVec2(557, 335), true)
                 imgui.Spacing()
                 imgui.Separator()
@@ -474,6 +474,8 @@ function imgui.OnDrawFrame()
                 imgui.Text(u8'Добавление нового раздела в главное меню, изменение цвета текстов.')
                 imgui.Text(u8'Обновление 4 - 1.15:')
                 imgui.Text(u8'Исправлен баг с незапуском скрипта.')
+                imgui.Text(u8'Обновление 5 - 1.20:')
+                imgui.Text(u8'Исправлен баг с новым разделом, изменена иконка последнего раздела.')
                 imgui.Spacing()
                 imgui.Separator()
                 imgui.Spacing()
