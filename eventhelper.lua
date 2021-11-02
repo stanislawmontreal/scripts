@@ -12,8 +12,8 @@ u8 = encoding.UTF8
 local dlstatus = require('moonloader').download_status
 update_state = false
 
-local script_vers = 2
-local script_vers_text = "1.05"
+local script_vers = 3
+local script_vers_text = "1.10"
 
 local update_url = "https://raw.githubusercontent.com/makvinov/scripts/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
@@ -24,6 +24,7 @@ local script_path = thisScript().path
 
 local main_window_state = imgui.ImBool(false)
 local menu = {true, 
+    false,
     false,
     false,
     false,
@@ -74,7 +75,7 @@ function main()
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.info.vers) > script_vers then
-                sampAddChatMessage("Есть обновление. Версия: " .. updateIni.info.vers_text, -1)
+                sampAddChatMessage('{F8F8FF}Обновление скрипта. Версия: {6964fa}' .. updateIni.info.vers_text, -1)
                 update_state = true
             end
             os.remove(update_path)
@@ -86,7 +87,8 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    sampAddChatMessage("Скрипт успешно обновлён!", -1)
+                    sampAddChatMessage('{F8F8FF}Скрипт успешно обновлён!', -1)
+                    sampAddChatMessage('{F8F8FF}Перезагрузите папку {6964fa}moonloader {F8F8FF}чтобы скрипт смог снова работать.', -1)
                     thisScript():reload()
                 end
             end)
@@ -103,7 +105,7 @@ function main()
         if myNick ~= 123 then
             sampAddChatMessage('')
             sampAddChatMessage('')
-            sampAddChatMessage('твой ник не ZXCмарвел поэтому пошол нахуи и eventHELPr не работаэ', -1)
+            sampAddChatMessage('{F8F8FF}твой ник {FF4500}НЕ {F8F8FF}ZXCмарвел поэтому пошол нахуи и eventHELPr не работаэ', -1)
             sampAddChatMessage('')
             sampAddChatMessage('')
             thisScript():unload()
@@ -129,7 +131,8 @@ function imgui.OnDrawFrame()
             if imgui.Selectable(fa.ICON_COG..u8' Настройка МП') then uu() menu[2] = true end --1
             if imgui.Selectable(fa.ICON_USER..u8' Функции') then uu() menu[3] = true end --2 
             if imgui.Selectable(fa.ICON_STICKY_NOTE..u8' ID предметов') then uu() menu[4] = true end --3
-            if imgui.Selectable(fa.ICON_MAP_MARKER_ALT..u8' Метки ТП') then uu() menu[5] = true end --4
+            if imgui.Selectable(fa.ICON_MAP_MARKER_ALT..u8' Метки ТП') then uu() menu[5] = true end
+            if imgui.Selectable(fa.ICON_FILE_EDIT..u8' Обновления') then uu() menu[6] = true end --4
         imgui.EndChild()
         imgui.SameLine()
         if menu[1] then --5
@@ -460,12 +463,27 @@ function imgui.OnDrawFrame()
             imgui.EndChild()
         end
 
+        if menu[5] then
+            imgui.BeginChild('child6', imgui.ImVec2(557, 335), true)
+                imgui.Spacing()
+                imgui.Separator()
+                imgui.Spacing()
+                imgui.Text(u8'Обновление 2 - 1.05:')
+                imgui.Text(u8'Мелкие правки в главном меню, запуск автоматической системы обновления.')
+                imgui.Text(u8'Обновление 3 - 1.10:')
+                imgui.Text(u8'Добавление нового раздела в главное меню, изменение цвета текстов.')
+                imgui.Spacing()
+                imgui.Separator()
+                imgui.Spacing()
+            imgui.EndChild()
+        end
+
         imgui.End()
     end
 end
 
 function uu()
-    for i = 0,5 do
+    for i = 0,6 do
         menu[i] = false
     end
 end
